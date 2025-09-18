@@ -1,0 +1,12 @@
+# macOS & Python
+.DS_Store
+__pycache__/
+*.pyc
+
+# Local environments
+.env
+.env.local
+
+# AWS CLI cached stuff 
+.aws/
+.aws-sso/
