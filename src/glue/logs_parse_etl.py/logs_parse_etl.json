@@ -1,0 +1,44 @@
+{
+  "name" : "logs_parse_etl",
+  "jobMode" : "SCRIPT",
+  "description" : "",
+  "role" : "arn:aws:iam::570282482024:role/MyGlueRoleForLogs",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-570282482024-us-east-1/scripts/logs_parse_etl.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--REJECT_PREFIX" : "logs/rejected/",
+    "--DQ_PREFIX" : "dq/parsing_accuracy/",
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--TempDir" : "s3://aws-glue-assets-570282482024-us-east-1/temporary/",
+    "--CLEAN_PREFIX" : "logs/clean/",
+    "--BUCKET" : "mylogs-pipeline-12345",
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-570282482024-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--RAW_PREFIX" : "logs/raw/",
+    "--job-language" : "python"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 480,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "5.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "Log-Analytics-Pipeline-on-AWS",
+    "branch" : "main",
+    "folder" : "src/glue/logs_parse_etl.py"
+  }
+}
